@@ -230,16 +230,38 @@
   .ajanda-gun-alt { font-size: 12.5px; color: #64748B; font-weight: 600; }
   .not-yaz-alan { display: flex; flex-direction: column; gap: 10px; }
   .not-girdi { width: 100%; border: 1px solid #CBD5E1; border-radius: 12px; padding: 12px 14px; font-size: 15px; background: #F8FAFC; color: #0E1B2C; min-height: 90px; resize: vertical; line-height: 1.5; font-family: inherit; }
-  .not-kart { background: #FFFBEB; border: 1px solid #FDE68A; border-left: 4px solid #F59E0B; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; }
+  .not-kart { background: #FFFBEB; border: 1px solid #FDE68A; border-left: 4px solid #F59E0B; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; display: flex; gap: 10px; align-items: flex-start; }
   .not-kart.bilgi { background: #fff; border-color: #E2E8F0; border-left-color: #4C6FFF; }
+  .not-kart.tamam { opacity: .6; }
+  .not-daire { width: 22px; height: 22px; min-width: 22px; border-radius: 999px; border: 2px solid #CBD5E1; background: #fff; display: flex; align-items: center; justify-content: center; margin-top: 1px; padding: 0; color: #fff; font-size: 12px; }
+  .not-daire.isaretli { background: #F59E0B; border-color: #F59E0B; }
+  .not-govde { flex: 1; min-width: 0; }
   .not-metin { font-size: 14.5px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; color: #1E293B; }
-  .not-alt-satir { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 8px; }
+  .not-metin.ustu-cizili { text-decoration: line-through; color: #94A3B8; }
+  .not-alt-satir { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; gap: 8px; }
   .not-saat { font-size: 12.5px; color: #64748B; font-weight: 600; }
-  .not-aksiyon { display: flex; gap: 4px; }
+  .not-aksiyon { display: flex; gap: 2px; }
+  .not-duzenle-girdi { width: 100%; border: 1px solid #F59E0B; border-radius: 10px; padding: 8px 10px; font-size: 14.5px; background: #fff; color: #0E1B2C; font-family: inherit; line-height: 1.5; resize: vertical; min-height: 40px; }
+  .not-duzenle-satir { display: flex; gap: 6px; align-items: center; margin-top: 8px; }
+  .not-duzenle-saat { border: 1px solid #CBD5E1; border-radius: 8px; padding: 6px 8px; font-size: 13px; font-family: inherit; }
+  .kucuk-btn { border: none; border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .kucuk-btn.kaydet { background: #0E7C66; color: #fff; }
+  .kucuk-btn.vazgec { background: #EEF2F5; color: #334155; }
+  .not-ipucu { font-size: 12px; color: #94A3B8; font-weight: 500; }
   .ozet-satir { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
   .ozet-kutu { flex: 1; min-width: 100px; background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 14px; }
   .ozet-deger { font-size: 22px; font-weight: 800; }
   .ozet-ad { font-size: 12px; color: #64748B; font-weight: 600; margin-top: 2px; }
+
+  /* kategori yönetimi */
+  .kat-yonet-satir { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #E2E8F0; border-radius: 12px; margin-bottom: 8px; background: #fff; }
+  .kat-yonet-renk { width: 16px; height: 16px; border-radius: 999px; flex: 0 0 auto; }
+  .kat-yonet-ad { flex: 1; font-weight: 600; font-size: 14.5px; }
+  .kat-yonet-say { font-size: 12px; color: #94A3B8; }
+  .kat-ekle-alan { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+  .kat-ekle-alan input[type=text] { flex: 1; min-width: 140px; border: 1px solid #CBD5E1; border-radius: 10px; padding: 10px 12px; font-size: 15px; background: #F8FAFC; font-family: inherit; }
+  .kat-ekle-alan input[type=color] { width: 44px; height: 44px; border: 1px solid #CBD5E1; border-radius: 10px; padding: 2px; background: #fff; cursor: pointer; }
+
   .takvim-not-im { font-size: 9px; line-height: 1; }
 
   .kat-rapor-satir { display: flex; justify-content: space-between; margin-bottom: 6px; }
@@ -415,16 +437,16 @@
       <div class="ozet-satir" id="ajanda-ozet"></div>
 
       <div class="panel">
-        <div class="panel-baslik"><span>Not ekle</span></div>
+        <div class="panel-baslik"><span>Madde ekle</span></div>
         <div class="not-yaz-alan">
-          <textarea class="not-girdi" id="not-metin" placeholder="Bugün aklında kalanları, toplantı notlarını, fikirlerini buraya yaz…"></textarea>
+          <textarea class="not-girdi" id="not-metin" placeholder="Bir madde yaz ve Enter'a bas — her Enter yeni bir madde ekler.&#10;(Alt satıra geçmek için Shift+Enter)"></textarea>
           <div class="form-satir" style="align-items:flex-end;gap:12px">
             <div style="flex:0 0 auto">
               <label class="form-etiket" for="not-saat">Saat / hatırlatma (isteğe bağlı)</label>
               <input class="girdi" id="not-saat" type="time" style="width:auto" />
             </div>
-            <div style="flex:1"></div>
-            <button class="yeni-btn" id="not-ekle-btn">+ Notu kaydet</button>
+            <div style="flex:1;min-width:0"><span class="not-ipucu">İpucu: Enter = maddeyi kaydet · Shift+Enter = alt satır</span></div>
+            <button class="yeni-btn" id="not-ekle-btn">+ Maddeyi ekle</button>
           </div>
         </div>
       </div>
@@ -470,7 +492,7 @@
     <textarea class="girdi" id="f-not" style="min-height:64px;resize:vertical" placeholder="Detay ekleyin…"></textarea>
     <div class="form-satir">
       <div>
-        <label class="form-etiket" for="f-kategori">Kategori</label>
+        <label class="form-etiket" for="f-kategori">Kategori · <span id="form-kat-yonet" style="color:#0E7C66;cursor:pointer;text-transform:none;letter-spacing:0">yönet</span></label>
         <select class="girdi" id="f-kategori"></select>
       </div>
       <div>
@@ -491,6 +513,29 @@
     <div class="modal-alt">
       <button class="iptal-btn" id="form-iptal">Vazgeç</button>
       <button class="kaydet-btn" id="form-kaydet">Görevi ekle</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ KATEGORİ YÖNETİMİ ============ -->
+<div id="kat-perde" class="perde gizli">
+  <div class="modal" role="dialog" aria-label="Kategori yönetimi">
+    <div class="modal-baslik">
+      <h2 id="kat-modal-baslik">Kategoriler</h2>
+      <button class="ikon-btn" id="kat-modal-kapat" aria-label="Kapat">✕</button>
+    </div>
+    <div id="kat-yonet-liste"></div>
+    <div style="border-top:1px solid #E2E8F0;margin-top:14px;padding-top:14px">
+      <label class="form-etiket">Yeni kategori ekle</label>
+      <div class="kat-ekle-alan">
+        <input type="text" id="kat-yeni-ad" placeholder="Kategori adı" maxlength="30" />
+        <input type="color" id="kat-yeni-renk" value="#0E7C66" aria-label="Renk seç" />
+        <button class="yeni-btn" id="kat-ekle-btn">+ Ekle</button>
+      </div>
+      <div id="kat-hata" class="hata-yazi gizli" style="margin-top:8px"></div>
+    </div>
+    <div class="modal-alt">
+      <button class="kaydet-btn" id="kat-modal-tamam">Bitti</button>
     </div>
   </div>
 </div>
@@ -526,13 +571,14 @@ const auth = getAuth(app);
 const db = getDatabase(app);
 
 /* ---------- sabitler ---------- */
-const KATEGORILER = [
+const VARSAYILAN_KATEGORILER = [
   { id: "carena-group", ad: "Carena Group", renk: "#0E7C66" },
   { id: "carenaparts", ad: "Carenaparts", renk: "#4C6FFF" },
   { id: "otobakimevi", ad: "OtoBakımEvi", renk: "#B45309" },
   { id: "enacore", ad: "Enacore", renk: "#BE185D" },
   { id: "kisisel", ad: "Kişisel", renk: "#64748B" },
 ];
+let kategoriler = VARSAYILAN_KATEGORILER.map(k => ({ ...k }));
 const ONCELIKLER = [
   { id: "yuksek", ad: "Yüksek", renk: "#DC2626" },
   { id: "orta", ad: "Orta", renk: "#D97706" },
@@ -561,6 +607,7 @@ let takvimTarih = new Date();
 let seciliGun = null;
 let onTanimliTarih = null;
 let ajandaTarih = bugunISO();
+let duzenlenenNotId = null;
 
 /* ---------- yardımcılar ---------- */
 const $ = (id) => document.getElementById(id);
@@ -573,7 +620,7 @@ function tarihGoster(iso) {
   const [y,m,g] = iso.split("-").map(Number);
   return `${g} ${AYLAR[m-1]}`;
 }
-const kategoriBul = (id) => KATEGORILER.find(k=>k.id===id) || KATEGORILER[4];
+const kategoriBul = (id) => kategoriler.find(k=>k.id===id) || { id: "silinmis", ad: "Kategorisiz", renk: "#94A3B8" };
 const oncelikBul = (id) => ONCELIKLER.find(o=>o.id===id) || ONCELIKLER[1];
 function kacHtml(s) {
   return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -682,10 +729,19 @@ onAuthStateChanged(auth, (u) => {
       if (sekme === "ajanda") ajandaCiz();
       if (sekme === "takvim") takvimCiz();
     }, (err) => console.error(err));
-    veriDinleyiciKapat = () => { gorevDinleyici(); notDinleyici(); };
+    const katRef = ref(db, `users/${u.uid}/kategoriler`);
+    const katDinleyici = onValue(katRef, (snap) => {
+      const v = snap.val();
+      const gelen = Array.isArray(v) ? v.filter(Boolean) : (v ? Object.values(v) : []);
+      kategoriler = gelen.length ? gelen : VARSAYILAN_KATEGORILER.map(k => ({ ...k }));
+      katSecimDoldur();
+      tumunuCiz();
+    }, (err) => console.error(err));
+    veriDinleyiciKapat = () => { gorevDinleyici(); notDinleyici(); katDinleyici(); };
   } else {
     gorevler = [];
     notlar = [];
+    kategoriler = VARSAYILAN_KATEGORILER.map(k => ({ ...k }));
     $("yukleme").classList.add("gizli");
     $("app").classList.add("gizli");
     $("giris").classList.remove("gizli");
@@ -708,6 +764,17 @@ async function notKaydet() {
   durumRozet("kaydediliyor");
   try {
     await set(ref(db, `users/${kullanici.uid}/notlar`), notlar);
+    durumRozet("bagli");
+  } catch (e) {
+    durumRozet("hata");
+  }
+}
+
+async function katKaydet() {
+  if (!kullanici) return;
+  durumRozet("kaydediliyor");
+  try {
+    await set(ref(db, `users/${kullanici.uid}/kategoriler`), kategoriler);
     durumRozet("bagli");
   } catch (e) {
     durumRozet("hata");
@@ -837,17 +904,19 @@ $("takvim-gun-detay").addEventListener("click", eylemIsle);
 function katCiz() {
   const alan = $("kat-satir");
   let html = `<button class="kat-chip ${katFiltre==="tumu" ? "tumu-aktif" : ""}" data-kat="tumu">Tümü</button>`;
-  for (const k of KATEGORILER) {
+  for (const k of kategoriler) {
     const aktif = katFiltre === k.id;
     html += `<button class="kat-chip" data-kat="${k.id}"
       style="${aktif ? `background:${k.renk};border-color:${k.renk};color:#fff` : ""}">
       <span class="nokta" style="background:${aktif ? "#fff" : k.renk}"></span>${k.ad}</button>`;
   }
+  html += `<button class="kat-chip" data-kat="__yonet" title="Kategorileri yönet" style="border-style:dashed">⚙ Yönet</button>`;
   alan.innerHTML = html;
 }
 $("kat-satir").addEventListener("click", (e) => {
   const btn = e.target.closest("[data-kat]");
   if (!btn) return;
+  if (btn.dataset.kat === "__yonet") { katModalAc(); return; }
   katFiltre = btn.dataset.kat;
   katCiz(); gorevleriCiz();
 });
@@ -959,7 +1028,7 @@ function raporCiz() {
     </div>`).join("");
 
   /* kategori dağılımı */
-  const katVeri = KATEGORILER.map(k => {
+  const katVeri = kategoriler.map(k => {
     const kl = gorevler.filter(g => g.kategori === k.id);
     return { ...k, toplam: kl.length, tamam: kl.filter(g=>g.done).length };
   }).filter(k => k.toplam > 0);
@@ -1266,10 +1335,12 @@ function ajandaCiz() {
   const gunGorev = gorevler.filter(x => x.dueDate === t);
   const gunNot = notlar.filter(n => n.tarih === t);
   const bekleyen = gunGorev.filter(x => !x.done).length;
+  const notBekleyen = gunNot.filter(n => !n.done).length;
   $("ajanda-ozet").innerHTML = `
     <div class="ozet-kutu"><div class="ozet-deger" style="color:#0E7C66">${gunGorev.length}</div><div class="ozet-ad">Görev</div></div>
-    <div class="ozet-kutu"><div class="ozet-deger" style="color:#D97706">${bekleyen}</div><div class="ozet-ad">Bekleyen</div></div>
-    <div class="ozet-kutu"><div class="ozet-deger" style="color:#4C6FFF">${gunNot.length}</div><div class="ozet-ad">Not</div></div>`;
+    <div class="ozet-kutu"><div class="ozet-deger" style="color:#D97706">${bekleyen}</div><div class="ozet-ad">Bekleyen görev</div></div>
+    <div class="ozet-kutu"><div class="ozet-deger" style="color:#4C6FFF">${gunNot.length}</div><div class="ozet-ad">Madde</div></div>
+    <div class="ozet-kutu"><div class="ozet-deger" style="color:#F59E0B">${notBekleyen}</div><div class="ozet-ad">Bekleyen madde</div></div>`;
 
   const ogeler = [];
   for (const x of gunGorev) ogeler.push({ tip: "gorev", saat: x.hatirlatma || "", g: x });
@@ -1281,29 +1352,50 @@ function ajandaCiz() {
 
   $("ajanda-sayi").textContent = ogeler.length ? `${ogeler.length} kayıt` : "";
   if (ogeler.length === 0) {
-    $("ajanda-liste").innerHTML = `<div style="color:#64748B;font-size:14px;padding:8px 0">Bu gün için henüz görev veya not yok. Yukarıdan not ekleyebilirsin.</div>`;
+    $("ajanda-liste").innerHTML = `<div style="color:#64748B;font-size:14px;padding:8px 0">Bu gün için henüz görev veya madde yok. Yukarıdan madde ekleyebilirsin.</div>`;
     return;
   }
   $("ajanda-liste").innerHTML = ogeler.map(o => {
     if (o.tip === "gorev") {
       const kat = kategoriBul(o.g.kategori);
-      return `<div class="not-kart bilgi">
-        <div class="not-metin"><b>📋 ${kacHtml(o.g.baslik)}</b>${o.g.done ? " ✓" : ""}${o.g.not ? "\n" + kacHtml(o.g.not) : ""}</div>
-        <div class="not-alt-satir">
-          <span class="not-saat">${o.saat ? "⏰ " + o.saat + " · " : ""}<span style="color:${kat.renk}">${kat.ad}</span></span>
+      return `<div class="not-kart bilgi ${o.g.done ? "tamam" : ""}">
+        <div class="not-govde">
+          <div class="not-metin ${o.g.done ? "ustu-cizili" : ""}"><b>📋 ${kacHtml(o.g.baslik)}</b>${o.g.done ? " ✓" : ""}${o.g.not ? "\n" + kacHtml(o.g.not) : ""}</div>
+          <div class="not-alt-satir">
+            <span class="not-saat">${o.saat ? "⏰ " + o.saat + " · " : ""}<span style="color:${kat.renk}">${kat.ad}</span></span>
+          </div>
         </div></div>`;
     } else {
-      return `<div class="not-kart">
-        <div class="not-metin">${kacHtml(o.n.metin)}</div>
-        <div class="not-alt-satir">
-          <span class="not-saat">${o.saat ? "⏰ " + o.saat : "✎ Not"}</span>
-          <span class="not-aksiyon">
-            <button class="ikon-btn" data-not-eylem="ics" data-not-id="${o.n.id}" title="Takvime ekle" aria-label="Takvime ekle">📅</button>
-            <button class="ikon-btn" data-not-eylem="sil" data-not-id="${o.n.id}" aria-label="Notu sil">🗑</button>
-          </span>
+      const n = o.n;
+      if (n.id === duzenlenenNotId) {
+        return `<div class="not-kart">
+          <div class="not-govde">
+            <textarea class="not-duzenle-girdi" id="not-duzenle-metin">${kacHtml(n.metin)}</textarea>
+            <div class="not-duzenle-satir">
+              <input class="not-duzenle-saat" id="not-duzenle-saat" type="time" value="${n.saat || ""}" />
+              <div style="flex:1"></div>
+              <button class="kucuk-btn vazgec" data-not-eylem="duzenle-vazgec">Vazgeç</button>
+              <button class="kucuk-btn kaydet" data-not-eylem="duzenle-kaydet" data-not-id="${n.id}">Kaydet</button>
+            </div>
+          </div></div>`;
+      }
+      return `<div class="not-kart ${n.done ? "tamam" : ""}">
+        <button class="not-daire ${n.done ? "isaretli" : ""}" data-not-eylem="toggle" data-not-id="${n.id}" aria-label="${n.done ? "Tamamlanmadı yap" : "Tamamlandı yap"}">${n.done ? "✓" : ""}</button>
+        <div class="not-govde">
+          <div class="not-metin ${n.done ? "ustu-cizili" : ""}">${kacHtml(n.metin)}</div>
+          <div class="not-alt-satir">
+            <span class="not-saat">${n.saat ? "⏰ " + n.saat : "✎ Madde"}</span>
+            <span class="not-aksiyon">
+              <button class="ikon-btn" data-not-eylem="duzenle" data-not-id="${n.id}" title="Düzenle" aria-label="Düzenle">✎</button>
+              <button class="ikon-btn" data-not-eylem="ics" data-not-id="${n.id}" title="Takvime ekle" aria-label="Takvime ekle">📅</button>
+              <button class="ikon-btn" data-not-eylem="sil" data-not-id="${n.id}" aria-label="Sil">🗑</button>
+            </span>
+          </div>
         </div></div>`;
     }
   }).join("");
+  const dm = $("not-duzenle-metin");
+  if (dm) { dm.focus(); dm.setSelectionRange(dm.value.length, dm.value.length); }
 }
 function notEkle() {
   const metin = $("not-metin").value.trim();
@@ -1313,26 +1405,64 @@ function notEkle() {
     tarih: ajandaTarih,
     metin,
     saat: $("not-saat").value || null,
+    done: false,
     createdAt: Date.now(),
     remindedAt: null,
   }, ...notlar];
   $("not-metin").value = "";
-  $("not-saat").value = "";
+  notKaydet();
+  ajandaCiz();
+  const alan = $("not-metin");
+  if (alan) alan.focus();
+}
+function notToggle(id) {
+  notlar = notlar.map(n => n.id === id ? { ...n, done: !n.done } : n);
   notKaydet();
   ajandaCiz();
 }
 function notSil(id) {
   notlar = notlar.filter(n => n.id !== id);
+  if (duzenlenenNotId === id) duzenlenenNotId = null;
   notKaydet();
   ajandaCiz();
 }
+function notDuzenleBaslat(id) {
+  duzenlenenNotId = id;
+  ajandaCiz();
+}
+function notDuzenleKaydet(id) {
+  const yeniMetin = $("not-duzenle-metin").value.trim();
+  const yeniSaat = $("not-duzenle-saat").value || null;
+  if (!yeniMetin) { notSil(id); return; }
+  notlar = notlar.map(n => n.id === id ? { ...n, metin: yeniMetin, saat: yeniSaat, remindedAt: null } : n);
+  duzenlenenNotId = null;
+  notKaydet();
+  ajandaCiz();
+}
+function notDuzenleVazgec() {
+  duzenlenenNotId = null;
+  ajandaCiz();
+}
 $("not-ekle-btn").addEventListener("click", notEkle);
+$("not-metin").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); notEkle(); }
+});
 $("ajanda-liste").addEventListener("click", (e) => {
   const btn = e.target.closest("[data-not-eylem]");
   if (!btn) return;
   const { notEylem, notId } = btn.dataset;
   if (notEylem === "sil") notSil(notId);
   else if (notEylem === "ics") icsIndirNot(notId);
+  else if (notEylem === "toggle") notToggle(notId);
+  else if (notEylem === "duzenle") notDuzenleBaslat(notId);
+  else if (notEylem === "duzenle-kaydet") notDuzenleKaydet(notId);
+  else if (notEylem === "duzenle-vazgec") notDuzenleVazgec();
+});
+$("ajanda-liste").addEventListener("keydown", (e) => {
+  if (e.target.id === "not-duzenle-metin" && e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    notDuzenleKaydet(duzenlenenNotId);
+  }
 });
 $("ajanda-tarih").addEventListener("change", (e) => { ajandaTarih = e.target.value || bugunISO(); ajandaCiz(); });
 $("ajanda-geri").addEventListener("click", () => { ajandaTarih = kaydirGun(ajandaTarih, -1); ajandaCiz(); });
@@ -1378,6 +1508,88 @@ $("f-baslik").addEventListener("input", () => $("f-hata").classList.add("gizli")
 $("yeni-btn").addEventListener("click", () => formAc(null));
 $("fab").addEventListener("click", () => { sekmeDegistir("gorevler"); formAc(null); });
 
+/* ============================================================
+   KATEGORİ YÖNETİMİ
+   ============================================================ */
+function katSecimDoldur() {
+  const s = $("f-kategori");
+  if (!s) return;
+  const eski = s.value;
+  s.innerHTML = kategoriler.map(k=>`<option value="${k.id}">${k.ad}</option>`).join("");
+  if (kategoriler.some(k => k.id === eski)) s.value = eski;
+}
+function katModalAc() {
+  $("kat-hata").classList.add("gizli");
+  katYonetListeCiz();
+  $("kat-perde").classList.remove("gizli");
+}
+function katModalKapat() { $("kat-perde").classList.add("gizli"); }
+function katYonetListeCiz() {
+  const alan = $("kat-yonet-liste");
+  alan.innerHTML = kategoriler.map(k => {
+    const sayi = gorevler.filter(g => g.kategori === k.id).length;
+    return `<div class="kat-yonet-satir">
+      <span class="kat-yonet-renk" style="background:${k.renk}"></span>
+      <span class="kat-yonet-ad">${kacHtml(k.ad)}</span>
+      <span class="kat-yonet-say">${sayi} görev</span>
+      <button class="ikon-btn" data-kat-eylem="sil" data-kat-id="${k.id}" title="Sil" aria-label="Kategoriyi sil">🗑</button>
+    </div>`;
+  }).join("");
+}
+function katSlug(ad) {
+  const map = { "ç":"c","ğ":"g","ı":"i","ö":"o","ş":"s","ü":"u","Ç":"c","Ğ":"g","İ":"i","Ö":"o","Ş":"s","Ü":"u" };
+  return ad.toLowerCase().replace(/[çğıöşüÇĞİÖŞÜ]/g, m => map[m] || m)
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || ("kat-" + Date.now().toString(36));
+}
+function katEkle() {
+  const ad = $("kat-yeni-ad").value.trim();
+  const renk = $("kat-yeni-renk").value || "#64748B";
+  const hata = $("kat-hata");
+  if (!ad) { hata.textContent = "Kategori adı boş olamaz."; hata.classList.remove("gizli"); return; }
+  if (kategoriler.some(k => k.ad.toLowerCase() === ad.toLowerCase())) {
+    hata.textContent = "Bu isimde bir kategori zaten var."; hata.classList.remove("gizli"); return;
+  }
+  let id = katSlug(ad);
+  while (kategoriler.some(k => k.id === id)) id += "-" + Math.random().toString(36).slice(2,4);
+  kategoriler = [...kategoriler, { id, ad, renk }];
+  $("kat-yeni-ad").value = "";
+  hata.classList.add("gizli");
+  katKaydet(); katSecimDoldur(); katYonetListeCiz(); tumunuCiz();
+}
+function katSil(id) {
+  const kat = kategoriler.find(k => k.id === id);
+  if (!kat) return;
+  if (kategoriler.length <= 1) {
+    const h = $("kat-hata"); h.textContent = "En az bir kategori kalmalı."; h.classList.remove("gizli"); return;
+  }
+  const sayi = gorevler.filter(g => g.kategori === id).length;
+  const onay = sayi > 0
+    ? `"${kat.ad}" kategorisinde ${sayi} görev var. Silersen bu görevler ilk kategoriye taşınır. Devam edilsin mi?`
+    : `"${kat.ad}" kategorisi silinsin mi?`;
+  if (!confirm(onay)) return;
+  kategoriler = kategoriler.filter(k => k.id !== id);
+  const hedef = kategoriler[0].id;
+  let gorevDegisti = false;
+  gorevler = gorevler.map(g => {
+    if (g.kategori === id) { gorevDegisti = true; return { ...g, kategori: hedef }; }
+    return g;
+  });
+  katKaydet();
+  if (gorevDegisti) kaydet();
+  katSecimDoldur(); katYonetListeCiz(); tumunuCiz();
+}
+$("kat-ekle-btn").addEventListener("click", katEkle);
+$("kat-yeni-ad").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); katEkle(); } });
+$("kat-yonet-liste").addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-kat-eylem]");
+  if (!btn) return;
+  if (btn.dataset.katEylem === "sil") katSil(btn.dataset.katId);
+});
+$("kat-modal-kapat").addEventListener("click", katModalKapat);
+$("kat-modal-tamam").addEventListener("click", katModalKapat);
+$("kat-perde").addEventListener("click", (e) => { if (e.target === $("kat-perde")) katModalKapat(); });
+$("form-kat-yonet").addEventListener("click", katModalAc);
+
 /* ---------- başlangıç ---------- */
 function tumunuCiz() {
   katCiz(); gorevleriCiz(); rozetGuncelle();
@@ -1389,8 +1601,7 @@ function tumunuCiz() {
 (function () {
   const d = new Date();
   $("tarih-yazi").textContent = `${d.getDate()} ${AYLAR[d.getMonth()]}, ${GUNLER[d.getDay()]}`;
-  const katSecim = $("f-kategori");
-  katSecim.innerHTML = KATEGORILER.map(k=>`<option value="${k.id}">${k.ad}</option>`).join("");
+  katSecimDoldur();
   $("f-oncelik").innerHTML = ONCELIKLER.map(o=>`<option value="${o.id}">${o.ad}</option>`).join("");
   $("ajanda-tarih").value = ajandaTarih;
 })();
