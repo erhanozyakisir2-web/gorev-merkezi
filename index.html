@@ -206,7 +206,7 @@
   .takvim-gun.baska-ay { color: #CBD5E1; }
   .takvim-gun.bugun { border-color: #0E7C66; color: #0E7C66; font-weight: 800; }
   .takvim-gun.secili { background: #0E1B2C; color: #fff; }
-  .takvim-noktalar { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center; }
+  .takvim-noktalar { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center; align-items: center; }
   .takvim-noktalar .nokta { width: 6px; height: 6px; }
   .takvim-gun .fazla { font-size: 9px; font-weight: 800; color: #64748B; }
   .takvim-gun.secili .fazla { color: #C6D2DE; }
@@ -222,6 +222,25 @@
   .banner b { color: #7FD1BE; }
   .banner button { border: none; background: rgba(255,255,255,.15); color: #fff; border-radius: 8px; padding: 6px 12px; font-weight: 700; }
   @media (max-width: 720px) { .alt-btn { padding: 8px 7px; font-size: 12px; } }
+
+  /* ajanda */
+  .ajanda-ust { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .ajanda-tarih-sec { display: flex; align-items: center; gap: 8px; }
+  .ajanda-gun-baslik { font-size: 17px; font-weight: 800; }
+  .ajanda-gun-alt { font-size: 12.5px; color: #64748B; font-weight: 600; }
+  .not-yaz-alan { display: flex; flex-direction: column; gap: 10px; }
+  .not-girdi { width: 100%; border: 1px solid #CBD5E1; border-radius: 12px; padding: 12px 14px; font-size: 15px; background: #F8FAFC; color: #0E1B2C; min-height: 90px; resize: vertical; line-height: 1.5; font-family: inherit; }
+  .not-kart { background: #FFFBEB; border: 1px solid #FDE68A; border-left: 4px solid #F59E0B; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; }
+  .not-kart.bilgi { background: #fff; border-color: #E2E8F0; border-left-color: #4C6FFF; }
+  .not-metin { font-size: 14.5px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; color: #1E293B; }
+  .not-alt-satir { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 8px; }
+  .not-saat { font-size: 12.5px; color: #64748B; font-weight: 600; }
+  .not-aksiyon { display: flex; gap: 4px; }
+  .ozet-satir { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .ozet-kutu { flex: 1; min-width: 100px; background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 14px; }
+  .ozet-deger { font-size: 22px; font-weight: 800; }
+  .ozet-ad { font-size: 12px; color: #64748B; font-weight: 600; margin-top: 2px; }
+  .takvim-not-im { font-size: 9px; line-height: 1; }
 
   .kat-rapor-satir { display: flex; justify-content: space-between; margin-bottom: 6px; }
   .kat-rapor-ad { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; }
@@ -319,6 +338,7 @@
         <nav class="sekmeler sadece-masaustu">
           <button class="sekme-btn aktif" id="sekme-gorevler-btn">Görevler <span class="sayac-mini gizli" id="aktif-sayac"></span></button>
           <button class="sekme-btn" id="sekme-takvim-btn">Takvim</button>
+          <button class="sekme-btn" id="sekme-ajanda-btn">Ajanda</button>
           <button class="sekme-btn" id="sekme-rapor-btn">Rapor</button>
           <button class="sekme-btn" id="sekme-bildirim-btn">🔔 <span class="rozet-sayi gizli" id="rozet-masaustu"></span></button>
         </nav>
@@ -378,6 +398,43 @@
       <div id="takvim-gun-detay"></div>
     </section>
 
+    <!-- ajanda sayfası -->
+    <section id="sayfa-ajanda" class="gizli">
+      <div class="ajanda-ust">
+        <div>
+          <div class="ajanda-gun-baslik" id="ajanda-gun-baslik"></div>
+          <div class="ajanda-gun-alt" id="ajanda-gun-alt"></div>
+        </div>
+        <div class="ajanda-tarih-sec">
+          <button class="takvim-nav" id="ajanda-geri" aria-label="Önceki gün">‹</button>
+          <input class="girdi" id="ajanda-tarih" type="date" style="width:auto" />
+          <button class="takvim-nav" id="ajanda-ileri" aria-label="Sonraki gün">›</button>
+        </div>
+      </div>
+
+      <div class="ozet-satir" id="ajanda-ozet"></div>
+
+      <div class="panel">
+        <div class="panel-baslik"><span>Not ekle</span></div>
+        <div class="not-yaz-alan">
+          <textarea class="not-girdi" id="not-metin" placeholder="Bugün aklında kalanları, toplantı notlarını, fikirlerini buraya yaz…"></textarea>
+          <div class="form-satir" style="align-items:flex-end;gap:12px">
+            <div style="flex:0 0 auto">
+              <label class="form-etiket" for="not-saat">Saat / hatırlatma (isteğe bağlı)</label>
+              <input class="girdi" id="not-saat" type="time" style="width:auto" />
+            </div>
+            <div style="flex:1"></div>
+            <button class="yeni-btn" id="not-ekle-btn">+ Notu kaydet</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-baslik"><span>Bu günün ajandası</span><span class="panel-alt" id="ajanda-sayi"></span></div>
+        <div id="ajanda-liste"></div>
+      </div>
+    </section>
+
     <!-- bildirim sayfası -->
     <section id="sayfa-bildirim" class="gizli">
       <div class="panel">
@@ -392,6 +449,7 @@
   <nav class="alt-bar sadece-mobil">
     <button class="alt-btn aktif" id="alt-gorevler">☰ Görev</button>
     <button class="alt-btn" id="alt-takvim">▦ Takvim</button>
+    <button class="alt-btn" id="alt-ajanda">✎ Ajanda</button>
     <button class="fab" id="fab" aria-label="Yeni görev ekle">+</button>
     <button class="alt-btn" id="alt-rapor">◔ Rapor</button>
     <button class="alt-btn" id="alt-bildirim">🔔 <span class="rozet-sayi gizli" id="rozet-mobil"></span></button>
@@ -491,6 +549,7 @@ const PERIYOTLAR = {
 
 /* ---------- durum ---------- */
 let gorevler = [];
+let notlar = [];
 let filtre = "aktif";
 let katFiltre = "tumu";
 let sekme = "gorevler";
@@ -501,6 +560,7 @@ let verilerYuklendi = false;
 let takvimTarih = new Date();
 let seciliGun = null;
 let onTanimliTarih = null;
+let ajandaTarih = bugunISO();
 
 /* ---------- yardımcılar ---------- */
 const $ = (id) => document.getElementById(id);
@@ -601,7 +661,7 @@ onAuthStateChanged(auth, (u) => {
     $("yukleme").textContent = "Görevleriniz yükleniyor…";
     verilerYuklendi = false;
     const veriRef = ref(db, `users/${u.uid}/gorevler`);
-    veriDinleyiciKapat = onValue(veriRef, (snap) => {
+    const gorevDinleyici = onValue(veriRef, (snap) => {
       const v = snap.val();
       gorevler = Array.isArray(v) ? v.filter(Boolean) : (v ? Object.values(v) : []);
       verilerYuklendi = true;
@@ -615,8 +675,17 @@ onAuthStateChanged(auth, (u) => {
       durumRozet("hata");
       console.error(err);
     });
+    const notRef = ref(db, `users/${u.uid}/notlar`);
+    const notDinleyici = onValue(notRef, (snap) => {
+      const v = snap.val();
+      notlar = Array.isArray(v) ? v.filter(Boolean) : (v ? Object.values(v) : []);
+      if (sekme === "ajanda") ajandaCiz();
+      if (sekme === "takvim") takvimCiz();
+    }, (err) => console.error(err));
+    veriDinleyiciKapat = () => { gorevDinleyici(); notDinleyici(); };
   } else {
     gorevler = [];
+    notlar = [];
     $("yukleme").classList.add("gizli");
     $("app").classList.add("gizli");
     $("giris").classList.remove("gizli");
@@ -628,6 +697,17 @@ async function kaydet() {
   durumRozet("kaydediliyor");
   try {
     await set(ref(db, `users/${kullanici.uid}/gorevler`), gorevler);
+    durumRozet("bagli");
+  } catch (e) {
+    durumRozet("hata");
+  }
+}
+
+async function notKaydet() {
+  if (!kullanici) return;
+  durumRozet("kaydediliyor");
+  try {
+    await set(ref(db, `users/${kullanici.uid}/notlar`), notlar);
     durumRozet("bagli");
   } catch (e) {
     durumRozet("hata");
@@ -782,7 +862,7 @@ $("filtre-grup").addEventListener("click", (e) => {
   gorevleriCiz();
 });
 
-const SAYFALAR = ["gorevler", "takvim", "rapor", "bildirim"];
+const SAYFALAR = ["gorevler", "takvim", "ajanda", "rapor", "bildirim"];
 function sekmeDegistir(yeni) {
   sekme = yeni;
   for (const s of SAYFALAR) {
@@ -792,6 +872,7 @@ function sekmeDegistir(yeni) {
   }
   if (sekme === "rapor") raporCiz();
   if (sekme === "takvim") takvimCiz();
+  if (sekme === "ajanda") ajandaCiz();
   if (sekme === "bildirim") { bildirimCiz(); izinDurumYaz(); }
 }
 for (const s of SAYFALAR) {
@@ -921,11 +1002,13 @@ function takvimCiz() {
     const iso = isoYap(t);
     const baskaAy = t.getMonth() !== ay;
     const gunun = gorevler.filter(x => x.dueDate === iso);
-    const noktalar = gunun.slice(0, 4).map(x =>
+    const notVar = notlar.some(n => n.tarih === iso);
+    const noktalar = gunun.slice(0, 3).map(x =>
       `<span class="nokta" style="background:${x.done ? "#CBD5E1" : kategoriBul(x.kategori).renk}"></span>`).join("");
-    const fazla = gunun.length > 4 ? `<span class="fazla">+${gunun.length - 4}</span>` : "";
+    const notIm = notVar ? `<span class="takvim-not-im">✎</span>` : "";
+    const fazla = gunun.length > 3 ? `<span class="fazla">+${gunun.length - 3}</span>` : "";
     html += `<button class="takvim-gun ${baskaAy ? "baska-ay" : ""} ${iso === bugun ? "bugun" : ""} ${iso === seciliGun ? "secili" : ""}" data-gun="${iso}">
-      <span>${t.getDate()}</span><span class="takvim-noktalar">${noktalar}${fazla}</span></button>`;
+      <span>${t.getDate()}</span><span class="takvim-noktalar">${noktalar}${notIm}${fazla}</span></button>`;
   }
   $("takvim-grid").innerHTML = html;
   gunDetayCiz();
@@ -962,7 +1045,15 @@ function gunDetayCiz() {
       </li>`;
     }).join("") + `</ul>`;
   }
+  const gununNotlari = notlar.filter(n => n.tarih === seciliGun);
+  if (gununNotlari.length > 0) {
+    html += `<div style="margin-top:14px;font-weight:800;font-size:13px;color:#475569">✎ Ajanda notları</div>`;
+    html += gununNotlari.map(n => `<div class="not-kart bilgi" style="margin-top:8px"><div class="not-metin">${kacHtml(n.metin)}</div>${n.saat ? `<div class="not-alt-satir"><span class="not-saat">⏰ ${n.saat}</span></div>` : ""}</div>`).join("");
+  }
+  html += `<div style="margin-top:12px"><button class="iptal-btn" id="detaydan-ajanda">Bu günün ajandasını aç →</button></div>`;
   alan.innerHTML = html + `</div>`;
+  const gecis = $("detaydan-ajanda");
+  if (gecis) gecis.addEventListener("click", () => { ajandaTarih = seciliGun; sekmeDegistir("ajanda"); });
 }
 
 $("takvim-grid").addEventListener("click", (e) => {
@@ -1067,12 +1158,12 @@ function alarmCal() {
 }
 
 /* ---------- hatırlatma motoru ---------- */
-function bannerGoster(g) {
+function bannerGoster(saat, metin) {
   const eski = document.getElementById("hatirlatma-banner");
   if (eski) eski.remove();
   const d = document.createElement("div");
   d.className = "banner"; d.id = "hatirlatma-banner";
-  d.innerHTML = `<span style="font-size:22px">⏰</span><div><b>${g.hatirlatma}</b> — ${kacHtml(g.baslik)}</div>`;
+  d.innerHTML = `<span style="font-size:22px">⏰</span><div><b>${saat}</b> — ${kacHtml(metin)}</div>`;
   const btn = document.createElement("button");
   btn.textContent = "Tamam";
   btn.addEventListener("click", () => d.remove());
@@ -1081,15 +1172,12 @@ function bannerGoster(g) {
   setTimeout(() => { if (document.getElementById("hatirlatma-banner") === d) d.remove(); }, 60000);
 }
 
-function hatirlat(g) {
-  bannerGoster(g);
+function hatirlat(saat, metin) {
+  bannerGoster(saat, metin);
   alarmCal();
   if ("Notification" in window && Notification.permission === "granted") {
     try {
-      new Notification("⏰ Görev Merkezi — Hatırlatma", {
-        body: `${g.hatirlatma} · ${g.baslik}`,
-        tag: g.id,
-      });
+      new Notification("⏰ Görev Merkezi — Hatırlatma", { body: `${saat} · ${metin}` });
     } catch (e) {}
   }
 }
@@ -1099,29 +1187,31 @@ function hatirlatmaKontrol() {
   const bugun = bugunISO();
   const s = new Date();
   const saatSimdi = `${String(s.getHours()).padStart(2,"0")}:${String(s.getMinutes()).padStart(2,"0")}`;
-  let degisti = false;
+  let gDegisti = false, nDegisti = false;
   for (const g of gorevler) {
     if (g.done || !g.dueDate || !g.hatirlatma || g.remindedAt) continue;
-    if (g.dueDate !== bugun) continue;
-    if (saatSimdi >= g.hatirlatma) {
-      g.remindedAt = Date.now();
-      degisti = true;
-      hatirlat(g);
+    if (g.dueDate === bugun && saatSimdi >= g.hatirlatma) {
+      g.remindedAt = Date.now(); gDegisti = true; hatirlat(g.hatirlatma, g.baslik);
     }
   }
-  if (degisti) { kaydet(); rozetGuncelle(); }
+  for (const n of notlar) {
+    if (!n.saat || n.remindedAt) continue;
+    if (n.tarih === bugun && saatSimdi >= n.saat) {
+      n.remindedAt = Date.now(); nDegisti = true; hatirlat(n.saat, n.metin);
+    }
+  }
+  if (gDegisti) { kaydet(); rozetGuncelle(); }
+  if (nDegisti) notKaydet();
 }
 setInterval(hatirlatmaKontrol, 20000);
 
 /* ---------- telefon takvimine aktarma (.ics) ---------- */
 function icsTemizle(s) { return String(s).replace(/\\/g, " ").replace(/[;,]/g, " ").replace(/\n/g, " "); }
-function icsIndir(id) {
-  const g = gorevler.find(x => x.id === id);
-  if (!g || !g.dueDate) return;
-  const [y, m, gg] = g.dueDate.split("-");
+function icsYaz(uid, tarih, saat, baslik, aciklama) {
+  const [y, m, gg] = tarih.split("-");
   let dtstart, dtend;
-  if (g.hatirlatma) {
-    const [hh, mm] = g.hatirlatma.split(":");
+  if (saat) {
+    const [hh, mm] = saat.split(":");
     dtstart = `DTSTART:${y}${m}${gg}T${hh}${mm}00`;
     const bit = new Date(+y, +m - 1, +gg, +hh, +mm + 30);
     dtend = `DTEND:${bit.getFullYear()}${String(bit.getMonth()+1).padStart(2,"0")}${String(bit.getDate()).padStart(2,"0")}T${String(bit.getHours()).padStart(2,"0")}${String(bit.getMinutes()).padStart(2,"0")}00`;
@@ -1130,26 +1220,123 @@ function icsIndir(id) {
     dtend = `DTEND;VALUE=DATE:${y}${m}${gg}`;
   }
   const ics = [
-    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//GorevMerkezi//TR",
-    "BEGIN:VEVENT",
-    `UID:${g.id}@gorevmerkezi`,
-    dtstart, dtend,
-    `SUMMARY:${icsTemizle(g.baslik)}`,
-    g.not ? `DESCRIPTION:${icsTemizle(g.not)}` : "",
-    "BEGIN:VALARM", "ACTION:DISPLAY",
-    `DESCRIPTION:${icsTemizle(g.baslik)}`,
-    "TRIGGER:-PT0M",
-    "END:VALARM",
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//GorevMerkezi//TR", "BEGIN:VEVENT",
+    `UID:${uid}@gorevmerkezi`, dtstart, dtend,
+    `SUMMARY:${icsTemizle(baslik)}`,
+    aciklama ? `DESCRIPTION:${icsTemizle(aciklama)}` : "",
+    "BEGIN:VALARM", "ACTION:DISPLAY", `DESCRIPTION:${icsTemizle(baslik)}`, "TRIGGER:-PT0M", "END:VALARM",
     "END:VEVENT", "END:VCALENDAR",
   ].filter(Boolean).join("\r\n");
   const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "gorev.ics";
+  a.download = "hatirlatma.ics";
   document.body.appendChild(a);
   a.click();
   a.remove();
 }
+function icsIndir(id) {
+  const g = gorevler.find(x => x.id === id);
+  if (!g || !g.dueDate) return;
+  icsYaz(g.id, g.dueDate, g.hatirlatma, g.baslik, g.not);
+}
+function icsIndirNot(id) {
+  const n = notlar.find(x => x.id === id);
+  if (!n) return;
+  icsYaz(n.id, n.tarih, n.saat, n.metin.slice(0, 60), n.metin);
+}
+
+/* ============================================================
+   AJANDA (gün gün notlar)
+   ============================================================ */
+function kaydirGun(iso, adet) {
+  const [y,m,g] = iso.split("-").map(Number);
+  return isoYap(new Date(y, m-1, g + adet));
+}
+function ajandaCiz() {
+  const t = ajandaTarih;
+  $("ajanda-tarih").value = t;
+  const [y,m,g] = t.split("-").map(Number);
+  const d = new Date(y, m-1, g);
+  const bugun = bugunISO();
+  const gunAdlari = ["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
+  $("ajanda-gun-baslik").textContent = `${g} ${AYLAR[m-1]} ${y}`;
+  $("ajanda-gun-alt").textContent = gunAdlari[d.getDay()] + (t === bugun ? " · Bugün" : "");
+
+  const gunGorev = gorevler.filter(x => x.dueDate === t);
+  const gunNot = notlar.filter(n => n.tarih === t);
+  const bekleyen = gunGorev.filter(x => !x.done).length;
+  $("ajanda-ozet").innerHTML = `
+    <div class="ozet-kutu"><div class="ozet-deger" style="color:#0E7C66">${gunGorev.length}</div><div class="ozet-ad">Görev</div></div>
+    <div class="ozet-kutu"><div class="ozet-deger" style="color:#D97706">${bekleyen}</div><div class="ozet-ad">Bekleyen</div></div>
+    <div class="ozet-kutu"><div class="ozet-deger" style="color:#4C6FFF">${gunNot.length}</div><div class="ozet-ad">Not</div></div>`;
+
+  const ogeler = [];
+  for (const x of gunGorev) ogeler.push({ tip: "gorev", saat: x.hatirlatma || "", g: x });
+  for (const n of gunNot) ogeler.push({ tip: "not", saat: n.saat || "", n });
+  ogeler.sort((a,b) => {
+    const sa = a.saat || "99:99", sb = b.saat || "99:99";
+    return sa < sb ? -1 : sa > sb ? 1 : 0;
+  });
+
+  $("ajanda-sayi").textContent = ogeler.length ? `${ogeler.length} kayıt` : "";
+  if (ogeler.length === 0) {
+    $("ajanda-liste").innerHTML = `<div style="color:#64748B;font-size:14px;padding:8px 0">Bu gün için henüz görev veya not yok. Yukarıdan not ekleyebilirsin.</div>`;
+    return;
+  }
+  $("ajanda-liste").innerHTML = ogeler.map(o => {
+    if (o.tip === "gorev") {
+      const kat = kategoriBul(o.g.kategori);
+      return `<div class="not-kart bilgi">
+        <div class="not-metin"><b>📋 ${kacHtml(o.g.baslik)}</b>${o.g.done ? " ✓" : ""}${o.g.not ? "\n" + kacHtml(o.g.not) : ""}</div>
+        <div class="not-alt-satir">
+          <span class="not-saat">${o.saat ? "⏰ " + o.saat + " · " : ""}<span style="color:${kat.renk}">${kat.ad}</span></span>
+        </div></div>`;
+    } else {
+      return `<div class="not-kart">
+        <div class="not-metin">${kacHtml(o.n.metin)}</div>
+        <div class="not-alt-satir">
+          <span class="not-saat">${o.saat ? "⏰ " + o.saat : "✎ Not"}</span>
+          <span class="not-aksiyon">
+            <button class="ikon-btn" data-not-eylem="ics" data-not-id="${o.n.id}" title="Takvime ekle" aria-label="Takvime ekle">📅</button>
+            <button class="ikon-btn" data-not-eylem="sil" data-not-id="${o.n.id}" aria-label="Notu sil">🗑</button>
+          </span>
+        </div></div>`;
+    }
+  }).join("");
+}
+function notEkle() {
+  const metin = $("not-metin").value.trim();
+  if (!metin) return;
+  notlar = [{
+    id: "n" + Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+    tarih: ajandaTarih,
+    metin,
+    saat: $("not-saat").value || null,
+    createdAt: Date.now(),
+    remindedAt: null,
+  }, ...notlar];
+  $("not-metin").value = "";
+  $("not-saat").value = "";
+  notKaydet();
+  ajandaCiz();
+}
+function notSil(id) {
+  notlar = notlar.filter(n => n.id !== id);
+  notKaydet();
+  ajandaCiz();
+}
+$("not-ekle-btn").addEventListener("click", notEkle);
+$("ajanda-liste").addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-not-eylem]");
+  if (!btn) return;
+  const { notEylem, notId } = btn.dataset;
+  if (notEylem === "sil") notSil(notId);
+  else if (notEylem === "ics") icsIndirNot(notId);
+});
+$("ajanda-tarih").addEventListener("change", (e) => { ajandaTarih = e.target.value || bugunISO(); ajandaCiz(); });
+$("ajanda-geri").addEventListener("click", () => { ajandaTarih = kaydirGun(ajandaTarih, -1); ajandaCiz(); });
+$("ajanda-ileri").addEventListener("click", () => { ajandaTarih = kaydirGun(ajandaTarih, 1); ajandaCiz(); });
 
 /* ---------- form ---------- */
 function formAc(id, onTarih) {
@@ -1196,6 +1383,7 @@ function tumunuCiz() {
   katCiz(); gorevleriCiz(); rozetGuncelle();
   if (sekme === "rapor") raporCiz();
   if (sekme === "takvim") takvimCiz();
+  if (sekme === "ajanda") ajandaCiz();
   if (sekme === "bildirim") bildirimCiz();
 }
 (function () {
@@ -1204,6 +1392,7 @@ function tumunuCiz() {
   const katSecim = $("f-kategori");
   katSecim.innerHTML = KATEGORILER.map(k=>`<option value="${k.id}">${k.ad}</option>`).join("");
   $("f-oncelik").innerHTML = ONCELIKLER.map(o=>`<option value="${o.id}">${o.ad}</option>`).join("");
+  $("ajanda-tarih").value = ajandaTarih;
 })();
 </script>
 </body>
