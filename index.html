@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Görev Merkezi</title>
 <meta name="theme-color" content="#0E1B2C" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -194,6 +197,30 @@
   .cubuk.son { background: #0E7C66; }
   .cubuk-ad { font-size: 11.5px; color: #64748B; margin-top: 6px; font-weight: 600; }
   .cubuk-ad.kucuk { font-size: 10px; }
+
+  /* dashboard */
+  .dash-halkalar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .dash-halka-kart { flex-direction: column; gap: 6px; padding: 18px 12px; }
+  .halka-etiket { font-size: 13px; font-weight: 700; color: #475569; text-align: center; }
+  .dash-yuzde-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .yuzde-kart { background: #fff; border: 1px solid #E2E8F0; border-radius: 14px; padding: 14px 16px; border-left: 4px solid #94A3B8; }
+  .yuzde-kart .buyuk { font-size: 26px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+  .yuzde-kart .etiket { font-size: 12.5px; color: #64748B; font-weight: 600; margin-top: 3px; }
+  .yuzde-kart .mini-bar { height: 6px; background: #EEF2F5; border-radius: 999px; overflow: hidden; margin-top: 8px; }
+  .yuzde-kart .mini-dolgu { height: 100%; border-radius: 999px; transition: width .5s ease; }
+  .dash-sure-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .sure-kart { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 14px; padding: 14px 16px; text-align: center; }
+  .sure-ikon { font-size: 22px; margin-bottom: 4px; }
+  .sure-deger { font-size: 20px; font-weight: 800; color: #0E1B2C; letter-spacing: -.01em; }
+  .sure-ad { font-size: 12px; color: #64748B; font-weight: 600; margin-top: 3px; line-height: 1.35; }
+  .yaklasan-satir { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid #F1F5F9; }
+  .yaklasan-satir:last-child { border-bottom: none; }
+  .yaklasan-govde { flex: 1; min-width: 0; }
+  .yaklasan-ad { font-weight: 700; font-size: 14px; word-break: break-word; }
+  .yaklasan-alt { font-size: 12px; color: #64748B; margin-top: 1px; }
+  .yaklasan-kalan { font-size: 13px; font-weight: 800; white-space: nowrap; text-align: right; }
+  @media (max-width: 520px) { .dash-halkalar { grid-template-columns: 1fr; } }
+
   /* takvim */
   .takvim-ust { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
   .takvim-baslik-yazi { font-size: 16px; font-weight: 800; }
@@ -252,6 +279,53 @@
   .ozet-kutu { flex: 1; min-width: 100px; background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 14px; }
   .ozet-deger { font-size: 22px; font-weight: 800; }
   .ozet-ad { font-size: 12px; color: #64748B; font-weight: 600; margin-top: 2px; }
+
+  /* ===== DEFTER / AJANDA GÖRÜNÜMÜ ===== */
+  .defter { display: flex; background: linear-gradient(180deg,#fffdf6,#fefcf3); border-radius: 14px; box-shadow: 0 8px 30px rgba(14,27,44,.12), 0 1px 0 rgba(0,0,0,.03); overflow: hidden; border: 1px solid #EAE2CC; }
+  .defter-spiral { flex: 0 0 26px; background:
+      repeating-linear-gradient(180deg, transparent 0 14px, #C9BE9E 14px 16px, transparent 16px 34px);
+      position: relative; background-color: #F3ECD8; border-right: 2px solid #E3D9BC; }
+  .defter-spiral::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 10px;
+      background: repeating-linear-gradient(180deg, transparent 0 8px, #B7A97F 8px 20px, transparent 20px 34px);
+      border-radius: 999px; opacity: .5; }
+  .defter-sayfa { flex: 1; min-width: 0; padding: 20px 22px 24px;
+      background-image:
+        linear-gradient(90deg, transparent 40px, #F3C9C0 40px, #F3C9C0 41px, transparent 41px),
+        repeating-linear-gradient(180deg, transparent 0 33px, #DCE7F0 33px 34px);
+      background-attachment: local; }
+  .defter .ajanda-gun-baslik { font-family: 'Caveat', cursive; font-size: 30px; font-weight: 700; color: #1E3A5F; line-height: 1.1; }
+  .defter .ajanda-gun-alt { font-family: 'Kalam', cursive; font-size: 13px; color: #8A7B57; font-weight: 400; margin-top: 2px; }
+  .defter-tarih { width: auto; border: 1px solid #E3D9BC !important; background: #FFFDF7 !important; border-radius: 8px; padding: 7px 9px; font-size: 13px; }
+  .defter-ozet { margin-bottom: 16px; padding-left: 30px; }
+  .defter-ozet .ozet-kutu { background: rgba(255,255,255,.7); border: 1px solid #EAE2CC; }
+  .defter-ozet .ozet-ad { color: #8A7B57; }
+
+  .defter-yaz { padding-left: 30px; margin-bottom: 18px; }
+  .defter-girdi { border: none !important; background: transparent !important; border-bottom: 2px dashed #C9BE9E !important; border-radius: 0 !important;
+      font-family: 'Kalam', cursive; font-size: 17px; color: #1E3A5F; padding: 6px 2px !important; min-height: 34px; line-height: 34px; overflow: hidden; }
+  .defter-girdi::placeholder { color: #B7A97F; font-style: italic; }
+  .defter-girdi:focus { outline: none; border-bottom-color: #1E3A5F !important; }
+  .defter-yaz-alt { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+  .defter-saat-etiket { font-size: 15px; }
+  .defter-saat-input { border: 1px solid #E3D9BC; background: #FFFDF7; border-radius: 8px; padding: 5px 8px; font-size: 13px; font-family: inherit; color: #1E3A5F; }
+  .defter-ipucu { color: #B7A97F; font-family: 'Kalam', cursive; }
+  .defter-ekle-btn { margin-left: auto; border: none; background: #1E3A5F; color: #fff; border-radius: 999px; padding: 8px 20px; font-family: 'Kalam', cursive; font-weight: 700; font-size: 14px; }
+
+  .defter-liste-baslik { font-family: 'Caveat', cursive; font-size: 22px; font-weight: 700; color: #1E3A5F; padding-left: 30px; margin-bottom: 6px; display: flex; align-items: baseline; gap: 8px; }
+  .defter-liste { padding-left: 8px; }
+  /* defterde not kartları: çizgili satır hissi */
+  .defter-liste .not-kart { background: transparent; border: none; border-left: none; border-radius: 0; border-bottom: 1px solid #DCE7F0; padding: 8px 6px 8px 0; margin-bottom: 0; }
+  .defter-liste .not-kart.bilgi { background: transparent; }
+  .defter-liste .not-metin { font-family: 'Kalam', cursive; font-size: 16px; color: #1E3A5F; }
+  .defter-liste .not-daire { border-color: #1E3A5F; }
+  .defter-liste .not-daire.isaretli { background: #1E3A5F; border-color: #1E3A5F; }
+  .defter-liste .not-kart.tamam .not-metin { color: #9DA9B3; }
+  .defter-liste .not-saat { font-family: 'Kalam', cursive; color: #8A7B57; }
+  @media (max-width: 560px) {
+    .defter-sayfa { padding: 16px 14px 20px; background-image: repeating-linear-gradient(180deg, transparent 0 33px, #DCE7F0 33px 34px); }
+    .defter-ozet, .defter-yaz, .defter-liste-baslik { padding-left: 8px; }
+    .defter .ajanda-gun-baslik { font-size: 26px; }
+  }
 
   /* kategori yönetimi */
   .kat-yonet-satir { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #E2E8F0; border-radius: 12px; margin-bottom: 8px; background: #fff; }
@@ -361,7 +435,7 @@
           <button class="sekme-btn aktif" id="sekme-gorevler-btn">Görevler <span class="sayac-mini gizli" id="aktif-sayac"></span></button>
           <button class="sekme-btn" id="sekme-takvim-btn">Takvim</button>
           <button class="sekme-btn" id="sekme-ajanda-btn">Ajanda</button>
-          <button class="sekme-btn" id="sekme-rapor-btn">Rapor</button>
+          <button class="sekme-btn" id="sekme-rapor-btn">Dashboard</button>
           <button class="sekme-btn" id="sekme-bildirim-btn">🔔 <span class="rozet-sayi gizli" id="rozet-masaustu"></span></button>
         </nav>
         <button class="cikis-btn" id="cikis-btn">Çıkış</button>
@@ -384,22 +458,51 @@
       <div id="gorev-alani"></div>
     </section>
 
-    <!-- rapor sayfası -->
+    <!-- rapor / dashboard sayfası -->
     <section id="sayfa-rapor" class="gizli">
-      <div class="rapor-ust">
-        <div class="halka-kart"><svg id="halka" width="140" height="140" viewBox="0 0 140 140" role="img"></svg></div>
-        <div class="stat-grup" id="stat-grup"></div>
+      <div class="periyot-satir" id="periyot-satir" style="margin-bottom:16px">
+        <button class="periyot-btn" data-periyot="gunluk">Günlük</button>
+        <button class="periyot-btn aktif" data-periyot="haftalik">Haftalık</button>
+        <button class="periyot-btn" data-periyot="aylik">Aylık</button>
+        <button class="periyot-btn" data-periyot="yillik">Yıllık</button>
       </div>
-      <div class="panel">
-        <div class="periyot-satir" id="periyot-satir">
-          <button class="periyot-btn" data-periyot="gunluk">Günlük</button>
-          <button class="periyot-btn aktif" data-periyot="haftalik">Haftalık</button>
-          <button class="periyot-btn" data-periyot="aylik">Aylık</button>
-          <button class="periyot-btn" data-periyot="yillik">Yıllık</button>
+
+      <!-- iki halka: tamamlama & zamanında oranı -->
+      <div class="dash-halkalar">
+        <div class="halka-kart dash-halka-kart">
+          <svg id="halka-tamam" width="150" height="150" viewBox="0 0 150 150" role="img"></svg>
+          <div class="halka-etiket">Tamamlama oranı</div>
         </div>
+        <div class="halka-kart dash-halka-kart">
+          <svg id="halka-zamaninda" width="150" height="150" viewBox="0 0 150 150" role="img"></svg>
+          <div class="halka-etiket">Zamanında yapma oranı</div>
+        </div>
+      </div>
+
+      <!-- dört yüzde kartı -->
+      <div class="dash-yuzde-grid" id="dash-yuzde"></div>
+
+      <!-- ortalama süre metrikleri -->
+      <div class="panel">
+        <div class="panel-baslik"><span>Süre ortalamaları</span><span class="panel-alt" id="dash-donem-ad"></span></div>
+        <div class="dash-sure-grid" id="dash-sure"></div>
+      </div>
+
+      <!-- sayısal özet kartları -->
+      <div class="stat-grup" id="stat-grup" style="margin-bottom:14px"></div>
+
+      <!-- dönemsel tamamlanan grafik -->
+      <div class="panel">
         <div class="panel-baslik"><span id="grafik-baslik"></span><span class="panel-alt" id="grafik-toplam"></span></div>
         <div class="cubuk-alan" id="cubuk-alan"></div>
       </div>
+
+      <!-- yaklaşan görevler (kalan süre) -->
+      <div class="panel">
+        <div class="panel-baslik"><span>Yaklaşan görevler</span><span class="panel-alt">zamanı gelmesine kalan süre</span></div>
+        <div id="dash-yaklasan"></div>
+      </div>
+
       <div class="panel">
         <div class="panel-baslik"><span>Kategoriye göre</span></div>
         <div id="kat-rapor"></div>
@@ -422,38 +525,36 @@
 
     <!-- ajanda sayfası -->
     <section id="sayfa-ajanda" class="gizli">
-      <div class="ajanda-ust">
-        <div>
-          <div class="ajanda-gun-baslik" id="ajanda-gun-baslik"></div>
-          <div class="ajanda-gun-alt" id="ajanda-gun-alt"></div>
-        </div>
-        <div class="ajanda-tarih-sec">
-          <button class="takvim-nav" id="ajanda-geri" aria-label="Önceki gün">‹</button>
-          <input class="girdi" id="ajanda-tarih" type="date" style="width:auto" />
-          <button class="takvim-nav" id="ajanda-ileri" aria-label="Sonraki gün">›</button>
-        </div>
-      </div>
-
-      <div class="ozet-satir" id="ajanda-ozet"></div>
-
-      <div class="panel">
-        <div class="panel-baslik"><span>Madde ekle</span></div>
-        <div class="not-yaz-alan">
-          <textarea class="not-girdi" id="not-metin" placeholder="Bir madde yaz ve Enter'a bas — her Enter yeni bir madde ekler.&#10;(Alt satıra geçmek için Shift+Enter)"></textarea>
-          <div class="form-satir" style="align-items:flex-end;gap:12px">
-            <div style="flex:0 0 auto">
-              <label class="form-etiket" for="not-saat">Saat / hatırlatma (isteğe bağlı)</label>
-              <input class="girdi" id="not-saat" type="time" style="width:auto" />
+      <div class="defter">
+        <div class="defter-spiral" aria-hidden="true"></div>
+        <div class="defter-sayfa">
+          <div class="ajanda-ust">
+            <div>
+              <div class="ajanda-gun-baslik" id="ajanda-gun-baslik"></div>
+              <div class="ajanda-gun-alt" id="ajanda-gun-alt"></div>
             </div>
-            <div style="flex:1;min-width:0"><span class="not-ipucu">İpucu: Enter = maddeyi kaydet · Shift+Enter = alt satır</span></div>
-            <button class="yeni-btn" id="not-ekle-btn">+ Maddeyi ekle</button>
+            <div class="ajanda-tarih-sec">
+              <button class="takvim-nav" id="ajanda-geri" aria-label="Önceki gün">‹</button>
+              <input class="girdi defter-tarih" id="ajanda-tarih" type="date" />
+              <button class="takvim-nav" id="ajanda-ileri" aria-label="Sonraki gün">›</button>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="panel">
-        <div class="panel-baslik"><span>Bu günün ajandası</span><span class="panel-alt" id="ajanda-sayi"></span></div>
-        <div id="ajanda-liste"></div>
+          <div class="ozet-satir defter-ozet" id="ajanda-ozet"></div>
+
+          <div class="defter-yaz">
+            <textarea class="not-girdi defter-girdi" id="not-metin" rows="1" placeholder="Bugün için bir madde yaz, Enter'a bas…"></textarea>
+            <div class="defter-yaz-alt">
+              <label class="defter-saat-etiket" for="not-saat">⏰</label>
+              <input class="defter-saat-input" id="not-saat" type="time" aria-label="Saat / hatırlatma" />
+              <span class="not-ipucu defter-ipucu">Enter = ekle · Shift+Enter = alt satır</span>
+              <button class="defter-ekle-btn" id="not-ekle-btn">Ekle</button>
+            </div>
+          </div>
+
+          <div class="defter-liste-baslik">Bugünün maddeleri <span class="panel-alt" id="ajanda-sayi"></span></div>
+          <div id="ajanda-liste" class="defter-liste"></div>
+        </div>
       </div>
     </section>
 
@@ -473,7 +574,7 @@
     <button class="alt-btn" id="alt-takvim">▦ Takvim</button>
     <button class="alt-btn" id="alt-ajanda">✎ Ajanda</button>
     <button class="fab" id="fab" aria-label="Yeni görev ekle">+</button>
-    <button class="alt-btn" id="alt-rapor">◔ Rapor</button>
+    <button class="alt-btn" id="alt-rapor">◔ Panel</button>
     <button class="alt-btn" id="alt-bildirim">🔔 <span class="rozet-sayi gizli" id="rozet-mobil"></span></button>
   </nav>
 </div>
@@ -985,36 +1086,140 @@ function grafikVerisi() {
     sayi: gorevler.filter(g => g.completedAt && g.completedAt >= d.bas && g.completedAt < d.bit).length }));
 }
 
+/* ---------- süre biçimlendirme ---------- */
+function sureBicim(ms) {
+  if (ms == null || isNaN(ms)) return "—";
+  const dk = Math.round(ms / 60000);
+  if (dk < 60) return `${dk} dk`;
+  const saat = Math.round(dk / 60);
+  if (saat < 24) return `${saat} saat`;
+  const gun = Math.floor(saat / 24);
+  if (gun < 30) { const kalanSaat = saat % 24; return kalanSaat ? `${gun} gün ${kalanSaat} sa` : `${gun} gün`; }
+  const ay = Math.floor(gun / 30);
+  const kalanGun = gun % 30;
+  return kalanGun ? `${ay} ay ${kalanGun} gün` : `${ay} ay`;
+}
+function kalanBicim(ms) {
+  if (ms < 0) return { yazi: sureBicim(-ms) + " gecikti", renk: "#DC2626" };
+  const dk = Math.round(ms / 60000);
+  if (dk < 60) return { yazi: dk + " dk kaldı", renk: "#DC2626" };
+  const saat = Math.round(dk / 60);
+  if (saat < 24) return { yazi: saat + " saat kaldı", renk: "#D97706" };
+  const gun = Math.floor(saat / 24);
+  return { yazi: gun + " gün kaldı", renk: gun <= 2 ? "#D97706" : "#0E7C66" };
+}
+
+/* ---------- dönem başlangıç zamanı (yüzde hesapları için) ---------- */
+function donemBaslangic() {
+  const s = new Date(); s.setHours(0,0,0,0);
+  if (periyot === "gunluk") return s.getTime();
+  if (periyot === "haftalik") return s.getTime() - 6 * 86400000;
+  if (periyot === "aylik") return s.getTime() - 27 * 86400000;
+  return new Date(s.getFullYear() - 1, s.getMonth(), s.getDate()).getTime();
+}
+
+/* ---------- bir görev son tarihinde/öncesinde mi tamamlandı ---------- */
+function zamanindaMi(g) {
+  if (!g.completedAt || !g.dueDate) return null;
+  const [y,m,d] = g.dueDate.split("-").map(Number);
+  const sonAn = new Date(y, m-1, d, 23, 59, 59, 999).getTime();
+  return g.completedAt <= sonAn;
+}
+
+/* ---------- halka çizimi ---------- */
+function halkaCiz(id, oran, renk, altYazi) {
+  const R = 56, C = 2*Math.PI*R;
+  const el = $(id);
+  el.setAttribute("aria-label", `${altYazi} yüzde ${oran}`);
+  el.innerHTML = `
+    <circle cx="75" cy="75" r="${R}" fill="none" stroke="#E2E8F0" stroke-width="13"/>
+    <circle cx="75" cy="75" r="${R}" fill="none" stroke="${renk}" stroke-width="13"
+      stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-oran/100)}"
+      transform="rotate(-90 75 75)" style="transition:stroke-dashoffset .8s ease"/>
+    <text x="75" y="72" text-anchor="middle" font-size="30" font-weight="800" fill="#0E1B2C">${oran}%</text>
+    <text x="75" y="92" text-anchor="middle" font-size="11" fill="#64748B">${altYazi}</text>`;
+}
+
 function raporCiz() {
+  const bugun = bugunISO();
+  const simdi = Date.now();
+  const donemBas = donemBaslangic();
+
+  /* ---- dönemdeki görevler ----
+     "oluşturduğum" = bu dönemde oluşturulan görevler (createdAt)
+     "tamamladığım" = bu dönemde tamamlanan görevler (completedAt) */
+  const donemOlusturulan = gorevler.filter(g => (g.createdAt || 0) >= donemBas);
+  const donemTamamlanan = gorevler.filter(g => g.completedAt && g.completedAt >= donemBas);
+
+  /* zamanında / geç (dönemde tamamlananlar, son tarihi olanlar üzerinden) */
+  const suresiOlanlar = donemTamamlanan.filter(g => g.dueDate);
+  const zamaninda = suresiOlanlar.filter(g => zamanindaMi(g) === true).length;
+  const gec = suresiOlanlar.filter(g => zamanindaMi(g) === false).length;
+  const suresiToplam = zamaninda + gec;
+  const zamanindaOran = suresiToplam ? Math.round(zamaninda / suresiToplam * 100) : 0;
+  const gecOran = suresiToplam ? Math.round(gec / suresiToplam * 100) : 0;
+
+  /* tamamlama oranı: dönemde oluşturulanların kaçı tamamlandı */
+  const donemOlusturulanTamam = donemOlusturulan.filter(g => g.done).length;
+  const tamamlamaOran = donemOlusturulan.length ? Math.round(donemOlusturulanTamam / donemOlusturulan.length * 100) : 0;
+
+  /* ---- iki halka ---- */
+  halkaCiz("halka-tamam", tamamlamaOran, "#0E7C66", "tamamlandı");
+  halkaCiz("halka-zamaninda", zamanindaOran, zamanindaOran >= 50 ? "#0E7C66" : "#D97706", "zamanında");
+
+  /* ---- dört yüzde kartı ---- */
+  const yuzdeler = [
+    { buyuk: `%${tamamlamaOran}`, etiket: "Ortalama iş tamamlama", renk: "#0E7C66", oran: tamamlamaOran },
+    { buyuk: `%${gecOran}`, etiket: "Geciktirme oranı", renk: "#DC2626", oran: gecOran },
+    { buyuk: `%${zamanindaOran}`, etiket: "Zamanında yapma", renk: "#0E7C66", oran: zamanindaOran },
+    { buyuk: `${suresiToplam}`, etiket: `Süreli & tamamlanan (${zamaninda} zamanında · ${gec} geç)`, renk: "#4C6FFF", oran: 100 },
+  ];
+  $("dash-yuzde").innerHTML = yuzdeler.map(y => `
+    <div class="yuzde-kart" style="border-left-color:${y.renk}">
+      <div class="buyuk" style="color:${y.renk}">${y.buyuk}</div>
+      <div class="etiket">${y.etiket}</div>
+      <div class="mini-bar"><div class="mini-dolgu" style="width:${y.oran}%;background:${y.renk}"></div></div>
+    </div>`).join("");
+
+  /* ---- süre ortalamaları ---- */
+  $("dash-donem-ad").textContent = PERIYOTLAR[periyot];
+  const tamamSureleri = donemTamamlanan
+    .filter(g => g.createdAt && g.completedAt && g.completedAt >= g.createdAt)
+    .map(g => g.completedAt - g.createdAt);
+  const ortTamamSure = tamamSureleri.length ? tamamSureleri.reduce((a,b)=>a+b,0) / tamamSureleri.length : null;
+
+  /* zamanında tamamlananların, son tarihe göre ne kadar erken bitirildiği */
+  const erkenSureler = donemTamamlanan
+    .filter(g => g.dueDate && zamanindaMi(g) === true)
+    .map(g => { const [y,m,d]=g.dueDate.split("-").map(Number); return new Date(y,m-1,d,23,59,59,999).getTime() - g.completedAt; });
+  const ortErken = erkenSureler.length ? erkenSureler.reduce((a,b)=>a+b,0)/erkenSureler.length : null;
+
+  /* gecikenlerin ortalama gecikmesi */
+  const gecikmeSureler = donemTamamlanan
+    .filter(g => g.dueDate && zamanindaMi(g) === false)
+    .map(g => { const [y,m,d]=g.dueDate.split("-").map(Number); return g.completedAt - new Date(y,m-1,d,23,59,59,999).getTime(); });
+  const ortGecikme = gecikmeSureler.length ? gecikmeSureler.reduce((a,b)=>a+b,0)/gecikmeSureler.length : null;
+
+  $("dash-sure").innerHTML = `
+    <div class="sure-kart"><div class="sure-ikon">⏱️</div><div class="sure-deger">${sureBicim(ortTamamSure)}</div><div class="sure-ad">Ortalama tamamlama süresi<br>(oluşturmadan bitirmeye)</div></div>
+    <div class="sure-kart"><div class="sure-ikon">✅</div><div class="sure-deger">${ortErken != null ? sureBicim(ortErken) + " erken" : "—"}</div><div class="sure-ad">Son tarihe göre ortalama<br>erken bitirme</div></div>
+    <div class="sure-kart"><div class="sure-ikon">⚠️</div><div class="sure-deger">${ortGecikme != null ? sureBicim(ortGecikme) : "—"}</div><div class="sure-ad">Gecikenlerin ortalama<br>gecikme süresi</div></div>`;
+
+  /* ---- sayısal özet ---- */
   const toplam = gorevler.length;
   const tamam = gorevler.filter(g=>g.done).length;
-  const oran = toplam ? Math.round(tamam/toplam*100) : 0;
-  const bugun = bugunISO();
   const geciken = gorevler.filter(g => !g.done && g.dueDate && g.dueDate < bugun).length;
-
-  /* halka */
-  const R = 52, C = 2*Math.PI*R;
-  $("halka").setAttribute("aria-label", `Tamamlanma oranı yüzde ${oran}`);
-  $("halka").innerHTML = `
-    <circle cx="70" cy="70" r="${R}" fill="none" stroke="#E2E8F0" stroke-width="12"/>
-    <circle cx="70" cy="70" r="${R}" fill="none" stroke="#0E7C66" stroke-width="12"
-      stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-oran/100)}"
-      transform="rotate(-90 70 70)" style="transition:stroke-dashoffset .8s ease"/>
-    <text x="70" y="66" text-anchor="middle" font-size="26" font-weight="800" fill="#0E1B2C">${oran}%</text>
-    <text x="70" y="86" text-anchor="middle" font-size="11" fill="#64748B">tamamlandı</text>`;
-
-  /* stat kartları */
   const statlar = [
     [toplam, "Toplam görev", "#0E1B2C"],
     [tamam, "Tamamlanan", "#0E7C66"],
     [toplam - tamam, "Bekleyen", "#D97706"],
-    [geciken, "Geciken", geciken > 0 ? "#DC2626" : "#64748B"],
+    [geciken, "Şu an geciken", geciken > 0 ? "#DC2626" : "#64748B"],
   ];
   $("stat-grup").innerHTML = statlar.map(([d, ad, renk]) =>
     `<div class="stat-kart"><div class="stat-deger" style="color:${renk}">${d}</div><div class="stat-ad">${ad}</div></div>`
   ).join("");
 
-  /* grafik */
+  /* ---- dönemsel grafik ---- */
   const grafik = grafikVerisi();
   const max = Math.max(1, ...grafik.map(g=>g.sayi));
   const pToplam = grafik.reduce((a,b)=>a+b.sayi,0);
@@ -1027,7 +1232,34 @@ function raporCiz() {
       <div class="cubuk-ad ${grafik.length > 8 ? "kucuk" : ""}">${g.ad}</div>
     </div>`).join("");
 
-  /* kategori dağılımı */
+  /* ---- yaklaşan görevler (kalan süre) ---- */
+  const yaklasan = gorevler
+    .filter(g => !g.done && g.dueDate)
+    .map(g => {
+      const [y,m,d] = g.dueDate.split("-").map(Number);
+      const hedef = g.hatirlatma
+        ? (() => { const [hh,mm]=g.hatirlatma.split(":"); return new Date(y,m-1,d,+hh,+mm).getTime(); })()
+        : new Date(y,m-1,d,23,59,59,999).getTime();
+      return { g, kalan: hedef - simdi };
+    })
+    .sort((a,b) => a.kalan - b.kalan)
+    .slice(0, 6);
+  $("dash-yaklasan").innerHTML = yaklasan.length === 0
+    ? `<div style="color:#64748B;font-size:14px">Son tarihi olan bekleyen görev yok.</div>`
+    : yaklasan.map(({g, kalan}) => {
+        const kat = kategoriBul(g.kategori);
+        const k = kalanBicim(kalan);
+        return `<div class="yaklasan-satir">
+          <span class="nokta" style="background:${kat.renk};width:10px;height:10px"></span>
+          <div class="yaklasan-govde">
+            <div class="yaklasan-ad">${g.oncelik === "yuksek" ? '<span class="unlem">!</span>' : ""}${kacHtml(g.baslik)}</div>
+            <div class="yaklasan-alt">${tarihGoster(g.dueDate)}${g.hatirlatma ? " · ⏰ " + g.hatirlatma : ""} · ${kat.ad}</div>
+          </div>
+          <div class="yaklasan-kalan" style="color:${k.renk}">${k.yazi}</div>
+        </div>`;
+      }).join("");
+
+  /* ---- kategori dağılımı ---- */
   const katVeri = kategoriler.map(k => {
     const kl = gorevler.filter(g => g.kategori === k.id);
     return { ...k, toplam: kl.length, tamam: kl.filter(g=>g.done).length };
@@ -1413,7 +1645,7 @@ function notEkle() {
   notKaydet();
   ajandaCiz();
   const alan = $("not-metin");
-  if (alan) alan.focus();
+  if (alan) { alan.style.height = "auto"; alan.focus(); }
 }
 function notToggle(id) {
   notlar = notlar.map(n => n.id === id ? { ...n, done: !n.done } : n);
@@ -1446,6 +1678,10 @@ function notDuzenleVazgec() {
 $("not-ekle-btn").addEventListener("click", notEkle);
 $("not-metin").addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); notEkle(); }
+});
+$("not-metin").addEventListener("input", (e) => {
+  e.target.style.height = "auto";
+  e.target.style.height = Math.max(34, e.target.scrollHeight) + "px";
 });
 $("ajanda-liste").addEventListener("click", (e) => {
   const btn = e.target.closest("[data-not-eylem]");
