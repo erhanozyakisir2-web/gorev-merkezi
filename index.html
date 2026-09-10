@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Görev Merkezi</title>
 <meta name="theme-color" content="#0E1B2C" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -245,6 +242,14 @@
   .bildirim-baslik { font-weight: 700; font-size: 14.5px; word-break: break-word; }
   .bildirim-alt { color: #64748B; font-size: 13px; margin-top: 2px; }
   .bildirim-izin-yazi { font-size: 14px; color: #334155; line-height: 1.5; }
+  .yedek-aciklama { font-size: 13.5px; color: #64748B; line-height: 1.5; margin-bottom: 14px; }
+  .yedek-ozet { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .yedek-ozet .yedek-rozet { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 999px; padding: 5px 12px; font-size: 12.5px; font-weight: 600; color: #475569; }
+  .yedek-btn-satir { display: flex; gap: 10px; flex-wrap: wrap; }
+  .yedek-sonuc { margin-top: 14px; padding: 11px 14px; border-radius: 10px; font-size: 13.5px; font-weight: 600; line-height: 1.5; }
+  .yedek-sonuc.basari { background: #D1FAE5; color: #065F46; }
+  .yedek-sonuc.hata { background: #FEE2E2; color: #B91C1C; }
+  .yedek-sonuc.bilgi { background: #EEF2F5; color: #334155; }
   .banner { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); background: #0E1B2C; color: #fff; padding: 14px 18px; border-radius: 14px; z-index: 100; box-shadow: 0 10px 30px rgba(14,27,44,.35); display: flex; gap: 12px; align-items: center; max-width: 92vw; }
   .banner b { color: #7FD1BE; }
   .banner button { border: none; background: rgba(255,255,255,.15); color: #fff; border-radius: 8px; padding: 6px 12px; font-weight: 700; }
@@ -280,51 +285,43 @@
   .ozet-deger { font-size: 22px; font-weight: 800; }
   .ozet-ad { font-size: 12px; color: #64748B; font-weight: 600; margin-top: 2px; }
 
-  /* ===== DEFTER / AJANDA GÖRÜNÜMÜ ===== */
-  .defter { display: flex; background: linear-gradient(180deg,#fffdf6,#fefcf3); border-radius: 14px; box-shadow: 0 8px 30px rgba(14,27,44,.12), 0 1px 0 rgba(0,0,0,.03); overflow: hidden; border: 1px solid #EAE2CC; }
-  .defter-spiral { flex: 0 0 26px; background:
-      repeating-linear-gradient(180deg, transparent 0 14px, #C9BE9E 14px 16px, transparent 16px 34px);
-      position: relative; background-color: #F3ECD8; border-right: 2px solid #E3D9BC; }
-  .defter-spiral::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 10px;
-      background: repeating-linear-gradient(180deg, transparent 0 8px, #B7A97F 8px 20px, transparent 20px 34px);
-      border-radius: 999px; opacity: .5; }
-  .defter-sayfa { flex: 1; min-width: 0; padding: 20px 22px 24px;
-      background-image:
-        linear-gradient(90deg, transparent 40px, #F3C9C0 40px, #F3C9C0 41px, transparent 41px),
-        repeating-linear-gradient(180deg, transparent 0 33px, #DCE7F0 33px 34px);
-      background-attachment: local; }
-  .defter .ajanda-gun-baslik { font-family: 'Caveat', cursive; font-size: 30px; font-weight: 700; color: #1E3A5F; line-height: 1.1; }
-  .defter .ajanda-gun-alt { font-family: 'Kalam', cursive; font-size: 13px; color: #8A7B57; font-weight: 400; margin-top: 2px; }
-  .defter-tarih { width: auto; border: 1px solid #E3D9BC !important; background: #FFFDF7 !important; border-radius: 8px; padding: 7px 9px; font-size: 13px; }
-  .defter-ozet { margin-bottom: 16px; padding-left: 30px; }
-  .defter-ozet .ozet-kutu { background: rgba(255,255,255,.7); border: 1px solid #EAE2CC; }
-  .defter-ozet .ozet-ad { color: #8A7B57; }
+  /* ===== AJANDA — KURUMSAL GÖRÜNÜM ===== */
+  .defter { display: flex; flex-direction: column; background: #fff; border-radius: 16px; box-shadow: 0 1px 3px rgba(14,27,44,.06); overflow: hidden; border: 1px solid #E2E8F0; }
+  .defter-spiral { display: none; }
+  .defter-sayfa { flex: 1; min-width: 0; padding: 0; }
+  .defter .ajanda-ust { padding: 20px 22px; margin: 0; border-bottom: 1px solid #EEF2F5; background: #FBFCFD; align-items: center; }
+  .defter .ajanda-gun-baslik { font-size: 22px; font-weight: 800; color: #0E1B2C; letter-spacing: -.02em; line-height: 1.15; }
+  .defter .ajanda-gun-alt { font-size: 13px; color: #64748B; font-weight: 600; margin-top: 3px; }
+  .defter-tarih { width: auto; border: 1px solid #CBD5E1 !important; background: #fff !important; border-radius: 9px; padding: 8px 10px; font-size: 13.5px; color: #0E1B2C; }
+  .defter-ozet { margin: 0; padding: 16px 22px; border-bottom: 1px solid #EEF2F5; }
+  .defter-ozet .ozet-kutu { background: #F8FAFC; border: 1px solid #E2E8F0; }
 
-  .defter-yaz { padding-left: 30px; margin-bottom: 18px; }
-  .defter-girdi { border: none !important; background: transparent !important; border-bottom: 2px dashed #C9BE9E !important; border-radius: 0 !important;
-      font-family: 'Kalam', cursive; font-size: 17px; color: #1E3A5F; padding: 6px 2px !important; min-height: 34px; line-height: 34px; overflow: hidden; }
-  .defter-girdi::placeholder { color: #B7A97F; font-style: italic; }
-  .defter-girdi:focus { outline: none; border-bottom-color: #1E3A5F !important; }
-  .defter-yaz-alt { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-  .defter-saat-etiket { font-size: 15px; }
-  .defter-saat-input { border: 1px solid #E3D9BC; background: #FFFDF7; border-radius: 8px; padding: 5px 8px; font-size: 13px; font-family: inherit; color: #1E3A5F; }
-  .defter-ipucu { color: #B7A97F; font-family: 'Kalam', cursive; }
-  .defter-ekle-btn { margin-left: auto; border: none; background: #1E3A5F; color: #fff; border-radius: 999px; padding: 8px 20px; font-family: 'Kalam', cursive; font-weight: 700; font-size: 14px; }
+  .defter-yaz { padding: 18px 22px; border-bottom: 1px solid #EEF2F5; background: #FBFCFD; }
+  .defter-girdi { border: 1px solid #CBD5E1 !important; background: #fff !important; border-radius: 10px !important;
+      font-family: inherit; font-size: 15px; color: #0E1B2C; padding: 11px 13px !important; min-height: 44px; line-height: 1.5; overflow: hidden; resize: none; }
+  .defter-girdi::placeholder { color: #94A3B8; font-style: normal; }
+  .defter-girdi:focus { outline: none; border-color: #0E7C66 !important; box-shadow: 0 0 0 3px rgba(14,124,102,.1); }
+  .defter-yaz-alt { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .defter-saat-etiket { font-size: 15px; color: #64748B; }
+  .defter-saat-input { border: 1px solid #CBD5E1; background: #fff; border-radius: 9px; padding: 7px 9px; font-size: 13.5px; font-family: inherit; color: #0E1B2C; }
+  .defter-ipucu { color: #94A3B8; font-size: 12px; font-weight: 500; }
+  .defter-ekle-btn { margin-left: auto; border: none; background: #0E7C66; color: #fff; border-radius: 10px; padding: 10px 22px; font-weight: 700; font-size: 14px; cursor: pointer; }
 
-  .defter-liste-baslik { font-family: 'Caveat', cursive; font-size: 22px; font-weight: 700; color: #1E3A5F; padding-left: 30px; margin-bottom: 6px; display: flex; align-items: baseline; gap: 8px; }
-  .defter-liste { padding-left: 8px; }
-  /* defterde not kartları: çizgili satır hissi */
-  .defter-liste .not-kart { background: transparent; border: none; border-left: none; border-radius: 0; border-bottom: 1px solid #DCE7F0; padding: 8px 6px 8px 0; margin-bottom: 0; }
+  .defter-liste-baslik { font-size: 13px; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: .06em; padding: 16px 22px 4px; margin: 0; display: flex; align-items: baseline; gap: 8px; }
+  .defter-liste-baslik .panel-alt { text-transform: none; letter-spacing: 0; font-weight: 500; }
+  .defter-liste { padding: 4px 22px 18px; }
+  .defter-liste .not-kart { background: transparent; border: none; border-radius: 0; border-bottom: 1px solid #F1F5F9; padding: 13px 4px; margin-bottom: 0; }
+  .defter-liste .not-kart:last-child { border-bottom: none; }
   .defter-liste .not-kart.bilgi { background: transparent; }
-  .defter-liste .not-metin { font-family: 'Kalam', cursive; font-size: 16px; color: #1E3A5F; }
-  .defter-liste .not-daire { border-color: #1E3A5F; }
-  .defter-liste .not-daire.isaretli { background: #1E3A5F; border-color: #1E3A5F; }
-  .defter-liste .not-kart.tamam .not-metin { color: #9DA9B3; }
-  .defter-liste .not-saat { font-family: 'Kalam', cursive; color: #8A7B57; }
+  .defter-liste .not-metin { font-family: inherit; font-size: 14.5px; color: #1E293B; line-height: 1.55; }
+  .defter-liste .not-daire { border-color: #CBD5E1; }
+  .defter-liste .not-daire.isaretli { background: #0E7C66; border-color: #0E7C66; }
+  .defter-liste .not-kart.tamam .not-metin { color: #94A3B8; }
+  .defter-liste .not-saat { font-family: inherit; color: #64748B; }
   @media (max-width: 560px) {
-    .defter-sayfa { padding: 16px 14px 20px; background-image: repeating-linear-gradient(180deg, transparent 0 33px, #DCE7F0 33px 34px); }
-    .defter-ozet, .defter-yaz, .defter-liste-baslik { padding-left: 8px; }
-    .defter .ajanda-gun-baslik { font-size: 26px; }
+    .defter .ajanda-ust, .defter-ozet, .defter-yaz { padding-left: 14px; padding-right: 14px; }
+    .defter-liste, .defter-liste-baslik { padding-left: 14px; padding-right: 14px; }
+    .defter .ajanda-gun-baslik { font-size: 20px; }
   }
 
   /* kategori yönetimi */
@@ -543,7 +540,7 @@
           <div class="ozet-satir defter-ozet" id="ajanda-ozet"></div>
 
           <div class="defter-yaz">
-            <textarea class="not-girdi defter-girdi" id="not-metin" rows="1" placeholder="Bugün için bir madde yaz, Enter'a bas…"></textarea>
+            <textarea class="not-girdi defter-girdi" id="not-metin" rows="1" placeholder="Yeni bir madde ekleyin, Enter ile kaydedin…"></textarea>
             <div class="defter-yaz-alt">
               <label class="defter-saat-etiket" for="not-saat">⏰</label>
               <input class="defter-saat-input" id="not-saat" type="time" aria-label="Saat / hatırlatma" />
@@ -565,6 +562,19 @@
         <div class="bildirim-izin-yazi" id="izin-yazi"></div>
         <button class="yeni-btn gizli" id="izin-btn" style="margin-top:12px">🔔 Bildirimlere izin ver</button>
       </div>
+
+      <div class="panel">
+        <div class="panel-baslik"><span>Yedekleme</span><span class="panel-alt" id="yedek-son-bilgi"></span></div>
+        <div class="yedek-aciklama">Tüm görevleriniz, ajanda maddeleriniz ve kategorileriniz tek bir dosyaya kaydedilir. Bu dosyayı bilgisayarınızda saklayabilir, gerektiğinde geri yükleyebilirsiniz.</div>
+        <div class="yedek-ozet" id="yedek-ozet"></div>
+        <div class="yedek-btn-satir">
+          <button class="yeni-btn" id="yedek-indir-btn">⬇ Yedek dosyası indir</button>
+          <button class="iptal-btn" id="yedek-yukle-btn">⬆ Yedekten geri yükle</button>
+          <input type="file" id="yedek-dosya" accept="application/json,.json" style="display:none" />
+        </div>
+        <div class="yedek-sonuc gizli" id="yedek-sonuc"></div>
+      </div>
+
       <div id="bildirim-listesi"></div>
     </section>
   </main>
@@ -1043,7 +1053,7 @@ function sekmeDegistir(yeni) {
   if (sekme === "rapor") raporCiz();
   if (sekme === "takvim") takvimCiz();
   if (sekme === "ajanda") ajandaCiz();
-  if (sekme === "bildirim") { bildirimCiz(); izinDurumYaz(); }
+  if (sekme === "bildirim") { bildirimCiz(); izinDurumYaz(); yedekCiz(); }
 }
 for (const s of SAYFALAR) {
   const sb = $("sekme-" + s + "-btn"); if (sb) sb.addEventListener("click", () => sekmeDegistir(s));
@@ -1435,6 +1445,97 @@ function izinDurumYaz() {
 $("izin-btn").addEventListener("click", async () => {
   try { await Notification.requestPermission(); } catch (e) {}
   izinDurumYaz();
+});
+
+/* ============================================================
+   YEDEKLEME (indir / geri yükle)
+   ============================================================ */
+const YEDEK_SON_ANAHTAR = "gm-son-yedek";
+
+function yedekCiz() {
+  $("yedek-ozet").innerHTML = `
+    <span class="yedek-rozet">${gorevler.length} görev</span>
+    <span class="yedek-rozet">${notlar.length} ajanda maddesi</span>
+    <span class="yedek-rozet">${kategoriler.length} kategori</span>`;
+  let sonBilgi = "";
+  try {
+    const t = localStorage.getItem(YEDEK_SON_ANAHTAR);
+    if (t) {
+      const d = new Date(Number(t));
+      sonBilgi = `Son yedek: ${d.toLocaleDateString("tr-TR")} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+    } else {
+      sonBilgi = "Henüz yedek alınmadı";
+    }
+  } catch (e) { sonBilgi = ""; }
+  $("yedek-son-bilgi").textContent = sonBilgi;
+}
+
+function yedekSonuc(tur, mesaj) {
+  const el = $("yedek-sonuc");
+  el.className = "yedek-sonuc " + tur;
+  el.textContent = mesaj;
+  el.classList.remove("gizli");
+}
+
+function yedekIndir() {
+  const veri = {
+    uygulama: "Gorev Merkezi",
+    surum: 1,
+    tarih: new Date().toISOString(),
+    gorevler,
+    notlar,
+    kategoriler,
+  };
+  const metin = JSON.stringify(veri, null, 2);
+  const blob = new Blob([metin], { type: "application/json;charset=utf-8" });
+  const d = new Date();
+  const dosyaAdi = `gorev-merkezi-yedek-${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}.json`;
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = dosyaAdi;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  try { localStorage.setItem(YEDEK_SON_ANAHTAR, String(Date.now())); } catch (e) {}
+  yedekCiz();
+  yedekSonuc("basari", `Yedek indirildi: ${dosyaAdi} (${gorevler.length} görev, ${notlar.length} madde, ${kategoriler.length} kategori).`);
+}
+
+async function yedekYukle(dosya) {
+  try {
+    const metin = await dosya.text();
+    const veri = JSON.parse(metin);
+    if (!veri || typeof veri !== "object" || (!Array.isArray(veri.gorevler) && !Array.isArray(veri.notlar) && !Array.isArray(veri.kategoriler))) {
+      yedekSonuc("hata", "Bu dosya geçerli bir Görev Merkezi yedeği gibi görünmüyor.");
+      return;
+    }
+    const yGorev = Array.isArray(veri.gorevler) ? veri.gorevler.filter(Boolean) : [];
+    const yNot = Array.isArray(veri.notlar) ? veri.notlar.filter(Boolean) : [];
+    const yKat = Array.isArray(veri.kategoriler) ? veri.kategoriler.filter(Boolean) : [];
+    const onay = confirm(
+      `Yedekteki veriler:\n• ${yGorev.length} görev\n• ${yNot.length} ajanda maddesi\n• ${yKat.length} kategori\n\n` +
+      `Bu yedek yüklenince MEVCUT verilerinizin yerine geçecek (tüm cihazlarınızda). ` +
+      `Devam etmeden önce dilerseniz önce mevcut halin yedeğini alın.\n\nGeri yükleme yapılsın mı?`
+    );
+    if (!onay) { yedekSonuc("bilgi", "Geri yükleme iptal edildi. Mevcut verileriniz olduğu gibi kaldı."); return; }
+
+    if (Array.isArray(veri.gorevler)) { gorevler = yGorev; await kaydet(); }
+    if (Array.isArray(veri.notlar)) { notlar = yNot; await notKaydet(); }
+    if (Array.isArray(veri.kategoriler) && yKat.length) { kategoriler = yKat; await katKaydet(); katSecimDoldur(); }
+    tumunuCiz();
+    yedekCiz();
+    yedekSonuc("basari", `Geri yükleme tamam: ${yGorev.length} görev, ${yNot.length} madde, ${yKat.length} kategori yüklendi. Değişiklikler tüm cihazlarınıza senkronlandı.`);
+  } catch (e) {
+    yedekSonuc("hata", "Dosya okunamadı. Doğru yedek dosyasını seçtiğinizden emin olun.");
+  }
+}
+
+$("yedek-indir-btn").addEventListener("click", yedekIndir);
+$("yedek-yukle-btn").addEventListener("click", () => $("yedek-dosya").click());
+$("yedek-dosya").addEventListener("change", (e) => {
+  const dosya = e.target.files && e.target.files[0];
+  if (dosya) yedekYukle(dosya);
+  e.target.value = "";
 });
 
 /* ---------- alarm sesi ---------- */
